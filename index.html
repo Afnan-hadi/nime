@@ -738,42 +738,42 @@
                     }, 200);
                     
                     // Show a special message
-                    const reasonTitle = this.querySelector('.reason-title').textContent;
-                    alert(`I love your ${reasonTitle.toLowerCase()} more every day! 💖`);
+                //    const reasonTitle = this.querySelector('.reason-title').textContent;
+              //      alert(`I love your ${reasonTitle.toLowerCase()} more every day! 💖`);
                 });
             });
         }
         
         // Send love message
-        function sendLoveMessage() {
-            const message = document.getElementById('loveMessage').value.trim();
+     //   function sendLoveMessage() {
+           // const message = document.getElementById('loveMessage').value.trim();
             
-            if (message === "") {
-                alert("Please write a message first! 💌");
-                return;
+      //      if (message === "") {
+              //  alert("Please write a message first! 💌");
+           //     return;
             }
             
             // Show confirmation
-            document.getElementById('messageConfirm').style.display = 'block';
+         //   document.getElementById('messageConfirm').style.display = 'block';
             
             // Save to localStorage
-            localStorage.setItem('loveMessageFromYou', message);
+        //    localStorage.setItem('loveMessageFromYou', message);
             
             // Clear textarea
-            document.getElementById('loveMessage').value = "";
+        //    document.getElementById('loveMessage').value = "";
             
             // Scroll to confirmation
-            document.getElementById('messageConfirm').scrollIntoView({ behavior: 'smooth', block: 'center' });
+         //   document.getElementById('messageConfirm').scrollIntoView({ behavior: 'smooth', block: 'center' });
             
             // Vibrate for feedback
-            if (navigator.vibrate) {
-                navigator.vibrate([100, 50, 100]);
+        //    if (navigator.vibrate) {
+        //        navigator.vibrate([100, 50, 100]);
             }
             
             // Hide confirmation after 5 seconds
-            setTimeout(() => {
-                document.getElementById('messageConfirm').style.display = 'none';
-            }, 5000);
+         / /  setTimeout(() => {
+         //       document.getElementById('messageConfirm').style.display = 'none';
+        //   }, 5000);
         }
         
         // Reveal secret message
