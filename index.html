@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For My Love ❤️</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        /* Mobile-First CSS */
+        :root {
+            --pink-light: #fff5f7;
+            --pink-medium: #ffccd5;
+            --pink-dark: #ff4d6d;
+            --pink-deep: #c9184a;
+            --text-dark: #5d001e;
+            --text-light: #fff0f3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background-color: var(--pink-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        
+        /* Header - Full screen height for mobile */
+        .mobile-header {
+            height: 100vh;
+            min-height: 600px;
+            background: linear-gradient(135deg, #ffafcc 0%, #ffc8dd 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hearts-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .floating-heart {
+            position: absolute;
+            font-size: 24px;
+            color: var(--pink-dark);
+            opacity: 0.7;
+            animation: floatUp 15s linear infinite;
+        }
+        
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .title-container {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            backdrop-filter: blur(10px);
+        }
+        
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.2rem;
+            color: var(--pink-deep);
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--pink-deep);
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .tap-instruction {
+            position: absolute;
+            bottom: 40px;
+            width: 100%;
+            text-align: center;
+            font-size: 1rem;
+            color: var(--pink-deep);
+            animation: pulse 2s infinite;
+            z-index: 2;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        
+        .swipe-down {
+            margin-top: 10px;
+            font-size: 1.5rem;
+        }
+        
+        /* Main Content - Card based for mobile */
+        .content-card {
+            background: white;
+            margin: 20px;
+            padding: 25px;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: var(--pink-deep);
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .card-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, var(--pink-medium), var(--pink-dark));
+            border-radius: 3px;
+        }
+        
+        .card-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, var(--pink-medium) 0%, var(--pink-medium) 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 0.4em;
+            background-position: 0 88%;
+            padding: 0 3px;
+        }
+        
+        /* Love Reasons - Swipeable cards */
+        .reasons-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 20px 10px;
+            margin: 0 10px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        
+        .reasons-container::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .reason-card {
+            flex: 0 0 85%;
+            scroll-snap-align: center;
+            background: white;
+            border-radius: 25px;
+            padding: 25px;
+            margin: 0 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .reason-icon {
+            font-size: 3rem;
+            color: var(--pink-dark);
+            margin-bottom: 15px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .reason-title {
+            font-size: 1.5rem;
+            color: var(--pink-deep);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        /* Memory Gallery - Grid for mobile */
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .memory-item {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            height: 180px;
+            position: relative;
+        }
+        
+        .memory-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .memory-item:active .memory-img {
+            transform: scale(1.05);
+        }
+        
+        .memory-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+            padding: 15px 10px 10px;
+            font-size: 0.9rem;
+        }
+        
+        /* Interactive Heart Button */
+        .heart-interactive {
+            text-align: center;
+            padding: 30px 20px;
+            margin: 20px;
+            background: linear-gradient(135deg, #ffccd5 0%, #ffb3c6 100%);
+            border-radius: 30px;
+        }
+        
+        .big-heart-btn {
+            font-size: 5rem;
+            color: var(--pink-dark);
+            margin: 20px auto;
+            display: block;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .big-heart-btn:active {
+            transform: scale(0.9);
+        }
+        
+        .love-count {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--pink-deep);
+            margin-top: 10px;
+        }
+        
+        /* Love Message Input */
+        .message-container {
+            margin: 20px;
+            padding: 25px;
+            background-color: white;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+        
+        .message-input {
+            width: 100%;
+            height: 150px;
+            padding: 15px;
+            border: 2px solid var(--pink-medium);
+            border-radius: 20px;
+            font-size: 1.1rem;
+            margin-top: 15px;
+            resize: none;
+            font-family: inherit;
+        }
+        
+        .send-btn {
+            width: 100%;
+            background: linear-gradient(to right, var(--pink-dark), var(--pink-deep));
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
+        }
+        
+        .send-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 8px rgba(255, 77, 109, 0.3);
+        }
+        
+        /* Secret Message */
+        .secret-container {
+            margin: 30px 20px;
+            text-align: center;
+        }
+        
+        .secret-btn {
+            background: white;
+            border: 3px dashed var(--pink-medium);
+            border-radius: 20px;
+            padding: 20px;
+            width: 100%;
+            font-size: 1.2rem;
+            color: var(--pink-deep);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .secret-btn:active {
+            background-color: var(--pink-light);
+            border-style: solid;
+        }
+        
+        .secret-message {
+            display: none;
+            margin-top: 20px;
+            padding: 25px;
+            background: linear-gradient(135deg, #ffafcc 0%, #ffc8dd 100%);
+            border-radius: 20px;
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.8rem;
+            color: var(--pink-deep);
+            line-height: 1.4;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Footer */
+        .mobile-footer {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #ffafcc 0%, #ffc8dd 100%);
+            margin-top: 40px;
+            border-radius: 40px 40px 0 0;
+        }
+        
+        .footer-heart {
+            font-size: 2.5rem;
+            color: var(--pink-dark);
+            margin: 15px 0;
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        /* Mobile-specific adjustments */
+        @media (max-width: 350px) {
+            h1 { font-size: 2.5rem; }
+            .reason-card { flex: 0 0 90%; }
+            .memory-grid { grid-template-columns: 1fr; }
+        }
+        
+        @media (min-width: 768px) {
+            .content-card, .message-container, .heart-interactive {
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .reasons-container {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            
+            .memory-grid {
+                grid-template-columns: repeat(3, 1fr);
+                max-width: 600px;
+                margin: 20px auto;
+            }
+        }
+        
+        /* Safe area for notches */
+        .safe-area-top {
+            padding-top: env(safe-area-inset-top);
+        }
+        
+        .safe-area-bottom {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Header - Full Screen -->
+    <header class="mobile-header safe-area-top">
+        <div class="hearts-container" id="heartsContainer"></div>
+        
+        <div class="title-container">
+            <h1>For <span id="loveName">My Love</span></h1>
+            <p class="subtitle">You are the best thing that ever happened to me</p>
+            <div class="heart-icon">
+                <i class="fas fa-heart" style="font-size: 3rem; color: #ff4d6d;"></i>
+            </div>
+        </div>
+        
+        <div class="tap-instruction">
+            <p>Scroll down for more love ❤️</p>
+            <div class="swipe-down">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Why I Love You Card -->
+    <section class="content-card">
+        <h2 class="card-title">Why I Love You</h2>
+        <p class="card-text">Every day with you feels like a beautiful dream. Your smile lights up my world, and your laughter is my favorite sound.</p>
+        <p class="card-text">I love how you <span class="highlight">always know how to make me feel better</span> when I'm down, and how you celebrate with me in moments of joy.</p>
+        <p class="card-text">You've shown me what true love means - it's in the little things, the everyday moments, and the way you look at me.</p>
+    </section>
+    
+    <!-- Reasons I Love You - Swipeable Cards -->
+    <section class="content-card">
+        <h2 class="card-title">Reasons I Adore You</h2>
+        <p class="card-text" style="text-align: center; margin-bottom: 20px;">Swipe left to see more reasons →</p>
+        
+        <div class="reasons-container">
+            <div class="reason-card">
+                <div class="reason-icon">
+                    <i class="fas fa-smile-beam"></i>
+                </div>
+                <h3 class="reason-title">Your Smile</h3>
+                <p>The way your eyes light up when you smile makes everything better. It's contagious and beautiful.</p>
+            </div>
+            
+            <div class="reason-card">
+                <div class="reason-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3 class="reason-title">Your Kindness</h3>
+                <p>You have the biggest heart. You're always there for others and show compassion in everything you do.</p>
+            </div>
+            
+            <div class="reason-card">
+                <div class="reason-icon">
+                    <i class="fas fa-laugh"></i>
+                </div>
+                <h3 class="reason-title">Your Sense of Humor</h3>
+                <p>You make me laugh like no one else. Even on tough days, you know how to bring joy and lightness.</p>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 20px; font-size: 0.9rem; color: #888;">
+            <i class="fas fa-hand-point-up"></i> Tap cards for more details
+        </div>
+    </section>
+    
+    <!-- Our Memories Gallery -->
+    <section class="content-card">
+        <h2 class="card-title">Our Memories</h2>
+        <p class="card-text">Every moment with you is special. Here are some memories I treasure:</p>
+        
+        <div class="memory-grid">
+            <div class="memory-item" onclick="openMemory(1)">
+                <img src="https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="memory-img" alt="Our first date">
+                <div class="memory-overlay">Our first date 💕</div>
+            </div>
+            
+            <div class="memory-item" onclick="openMemory(2)">
+                <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="memory-img" alt="Coffee together">
+                <div class="memory-overlay">Morning coffee together ☕</div>
+            </div>
+            
+            <div class="memory-item" onclick="openMemory(3)">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Adventure time">
+                <div class="memory-overlay">Our adventures 🌄</div>
+            </div>
+            
+            <div class="memory-item" onclick="openMemory(4)">
+                <img src="https://images.unsplash.com/photo-1529254479751-fbacb4c7a587?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="memory-img" alt="Celebrating together">
+                <div class="memory-overlay">Celebrations 🎉</div>
+            </div>
+        </div>
+        
+        <p style="text-align: center; margin-top: 20px; font-style: italic;">
+            Tap on any memory to enlarge it
+        </p>
+    </section>
+    
+    <!-- Interactive Heart Counter -->
+    <section class="heart-interactive">
+        <h2 class="card-title">My Love for You</h2>
+        <p class="card-text" style="color: #5d001e; text-align: center;">
+            Tap the heart to see how much I love you!
+        </p>
+        
+        <button class="big-heart-btn" id="heartButton">
+            <i class="fas fa-heart"></i>
+        </button>
+        
+        <div class="love-count" id="loveCount">0</div>
+        <p style="margin-top: 10px; font-size: 1.1rem;">That's how many times my heart beats for you every minute!</p>
+        
+        <div style="margin-top: 25px; padding: 15px; background: rgba(255,255,255,0.7); border-radius: 20px;">
+            <p style="font-weight: bold; color: #c9184a;">💖 Fun Fact:</p>
+            <p>My love for you grows every second. No matter the distance or time, you're always in my heart.</p>
+        </div>
+    </section>
+    
+    <!-- Write a Love Message -->
+    <section class="message-container">
+        <h2 class="card-title">Write Back to Me</h2>
+        <p class="card-text">I'd love to hear what you think! Write me a message:</p>
+        
+        <textarea class="message-input" id="loveMessage" placeholder="Type your love message here... 💌"></textarea>
+        
+        <button class="send-btn" onclick="sendLoveMessage()">
+            <i class="fas fa-paper-plane"></i> Send Love Message
+        </button>
+        
+        <div id="messageConfirm" style="display: none; margin-top: 20px; padding: 15px; background-color: #e8f5e9; border-radius: 15px; text-align: center;">
+            <i class="fas fa-check-circle" style="color: #4caf50; font-size: 2rem;"></i>
+            <p style="margin-top: 10px; font-weight: bold; color: #2e7d32;">Message Sent to My Heart! 💖</p>
+            <p>I'll cherish your words forever.</p>
+        </div>
+    </section>
+    
+    <!-- Secret Message -->
+    <section class="secret-container">
+        <button class="secret-btn" onclick="revealSecret()">
+            <i class="fas fa-lock"></i> Tap to reveal a secret message
+        </button>
+        
+        <div class="secret-message" id="secretMessage">
+            No matter where life takes us, you will always be my favorite person. I love you more than words could ever express.
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="mobile-footer safe-area-bottom">
+        <div class="footer-heart">
+            <i class="fas fa-heart"></i>
+        </div>
+        <h3 style="color: #5d001e; margin-bottom: 10px;">Made with love for you</h3>
+        <p style="color: #5d001e;">Every day with you is special</p>
+        <p style="margin-top: 15px; font-size: 0.9rem; color: #9d174d;">© <span id="currentYear"></span> My Eternal Love</p>
+        
+        <div style="margin-top: 20px; display: flex; justify-content: center; gap: 20px;">
+            <div class="footer-icon">
+                <i class="fas fa-heart" style="color: #ff4d6d;"></i>
+            </div>
+            <div class="footer-icon">
+                <i class="fas fa-kiss-wink-heart" style="color: #ff4d6d;"></i>
+            </div>
+            <div class="footer-icon">
+                <i class="fas fa-heartbeat" style="color: #ff4d6d;"></i>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current year
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // Ask for loved one's name
+            setTimeout(() => {
+                const loveName = prompt("What is your loved one's name?", "My Love");
+                if (loveName && loveName.trim() !== "") {
+                    document.getElementById('loveName').textContent = loveName;
+                    document.title = `For ${loveName} ❤️`;
+                }
+            }, 1000);
+            
+            // Create floating hearts
+            createFloatingHearts();
+            
+            // Make reason cards interactive
+            setupReasonCards();
+        });
+        
+        // Create floating hearts animation
+        function createFloatingHearts() {
+            const container = document.getElementById('heartsContainer');
+            const heartCount = 15;
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.innerHTML = '❤';
+                
+                // Random properties
+                const left = Math.random() * 100;
+                const size = Math.random() * 20 + 15;
+                const delay = Math.random() * 10;
+                const duration = Math.random() * 10 + 15;
+                
+                heart.style.left = `${left}%`;
+                heart.style.fontSize = `${size}px`;
+                heart.style.animationDelay = `${delay}s`;
+                heart.style.animationDuration = `${duration}s`;
+                
+                container.appendChild(heart);
+            }
+        }
+        
+        // Heart button interaction
+        let loveCounter = 0;
+        const heartButton = document.getElementById('heartButton');
+        const loveCountDisplay = document.getElementById('loveCount');
+        
+        heartButton.addEventListener('click', function() {
+            // Increase counter
+            loveCounter += 1000;
+            loveCountDisplay.textContent = loveCounter.toLocaleString();
+            
+            // Add visual feedback
+            heartButton.style.transform = 'scale(0.9)';
+            heartButton.style.color = '#ff1744';
+            
+            // Create mini hearts
+            createMiniHearts();
+            
+            // Reset button style
+            setTimeout(() => {
+                heartButton.style.transform = 'scale(1)';
+                heartButton.style.color = '#ff4d6d';
+            }, 200);
+            
+            // Play a subtle vibration if supported
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
+            }
+        });
+        
+        // Create mini hearts animation
+        function createMiniHearts() {
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    const miniHeart = document.createElement('div');
+                    miniHeart.innerHTML = '❤';
+                    miniHeart.style.position = 'fixed';
+                    miniHeart.style.fontSize = '20px';
+                    miniHeart.style.color = '#ff4d6d';
+                    miniHeart.style.pointerEvents = 'none';
+                    miniHeart.style.zIndex = '1000';
+                    
+                    // Position near the heart button
+                    const buttonRect = heartButton.getBoundingClientRect();
+                    const startX = buttonRect.left + buttonRect.width / 2;
+                    const startY = buttonRect.top + buttonRect.height / 2;
+                    
+                    miniHeart.style.left = `${startX}px`;
+                    miniHeart.style.top = `${startY}px`;
+                    
+                    document.body.appendChild(miniHeart);
+                    
+                    // Random movement
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = 50 + Math.random() * 100;
+                    const duration = 800 + Math.random() * 700;
+                    
+                    // Animate
+                    miniHeart.animate([
+                        { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+                        { transform: `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) scale(0.5)`, opacity: 0 }
+                    ], {
+                        duration: duration,
+                        easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
+                    });
+                    
+                    // Remove after animation
+                    setTimeout(() => {
+                        if (miniHeart.parentNode) {
+                            document.body.removeChild(miniHeart);
+                        }
+                    }, duration);
+                }, i * 50);
+            }
+        }
+        
+        // Setup reason cards interaction
+        function setupReasonCards() {
+            const reasonCards = document.querySelectorAll('.reason-card');
+            reasonCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Add visual feedback
+                    this.style.transform = 'scale(0.98)';
+                    this.style.boxShadow = '0 4px 10px rgba(0,0,0,0.1)';
+                    
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                        this.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)';
+                    }, 200);
+                    
+                    // Show a special message
+                    const reasonTitle = this.querySelector('.reason-title').textContent;
+                    alert(`I love your ${reasonTitle.toLowerCase()} more every day! 💖`);
+                });
+            });
+        }
+        
+        // Send love message
+        function sendLoveMessage() {
+            const message = document.getElementById('loveMessage').value.trim();
+            
+            if (message === "") {
+                alert("Please write a message first! 💌");
+                return;
+            }
+            
+            // Show confirmation
+            document.getElementById('messageConfirm').style.display = 'block';
+            
+            // Save to localStorage
+            localStorage.setItem('loveMessageFromYou', message);
+            
+            // Clear textarea
+            document.getElementById('loveMessage').value = "";
+            
+            // Scroll to confirmation
+            document.getElementById('messageConfirm').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Vibrate for feedback
+            if (navigator.vibrate) {
+                navigator.vibrate([100, 50, 100]);
+            }
+            
+            // Hide confirmation after 5 seconds
+            setTimeout(() => {
+                document.getElementById('messageConfirm').style.display = 'none';
+            }, 5000);
+        }
+        
+        // Reveal secret message
+        function revealSecret() {
+            const secretMessage = document.getElementById('secretMessage');
+            const secretBtn = document.querySelector('.secret-btn');
+            
+            if (secretMessage.style.display === 'block') {
+                secretMessage.style.display = 'none';
+                secretBtn.innerHTML = '<i class="fas fa-lock"></i> Tap to reveal a secret message';
+            } else {
+                secretMessage.style.display = 'block';
+                secretBtn.innerHTML = '<i class="fas fa-lock-open"></i> Secret message revealed!';
+                
+                // Scroll to message
+                setTimeout(() => {
+                    secretMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 300);
+                
+                // Vibrate
+                if (navigator.vibrate) {
+                    navigator.vibrate(100);
+                }
+            }
+        }
+        
+        // Memory tap handler
+        function openMemory(memoryNum) {
+            const messages = [
+                "Our first date was magical. I knew then that you were someone special.",
+                "I love our coffee mornings. They're simple but mean so much to me.",
+                "Every adventure with you is exciting. I can't wait for our next one!",
+                "Celebrating life's moments with you makes everything twice as meaningful."
+            ];
+            
+            alert(messages[memoryNum - 1] + " 💖");
+            
+            // Vibrate for feedback
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
+            }
+        }
+        
+        // Check for saved message on load
+        window.onload = function() {
+            const savedMessage = localStorage.getItem('loveMessageFromYou');
+            if (savedMessage) {
+                document.getElementById('loveMessage').placeholder = "You previously wrote: " + 
+                    (savedMessage.length > 40 ? savedMessage.substring(0, 40) + "..." : savedMessage);
+            }
+        };
+    </script>
+</body>
+</html>
